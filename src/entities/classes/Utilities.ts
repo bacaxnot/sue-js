@@ -1,4 +1,4 @@
-export class Converter {
+export class Utilities {
     private static template: HTMLTemplateElement = document.createElement('template')
 
     public static htmlToElement(HTMLstring: string): HTMLElement {
