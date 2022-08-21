@@ -1,4 +1,4 @@
-import { IApp } from "../interfaces/app.interface"
+import { IApp } from "../interfaces/iApp"
 import Component from "./Component"
 
 export default class App implements IApp {
