@@ -1,11 +1,9 @@
-import Component from "../classes/Component"
-import { ComponentVars } from "./iComponentVars"
+import { Component } from "../classes/Component"
+import { IComponentVars } from "./iComponentVars"
 
 export interface IComponent {
-    readonly content: Element,
-    readonly components: Array<Component>,
-    readonly vars: ComponentVars,
-    readonly asyncVars: ComponentVars,
-
-    //render(): void,
+    readonly name:string,
+    readonly content:Element,
+    readonly components:Array<Component>,
+    readonly vars:IComponentVars
 } 

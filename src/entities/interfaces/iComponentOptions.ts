@@ -1,13 +1,12 @@
-import { ComponentVars } from "./iComponentVars"
-import { EventRegister } from "./iEventRegister"
-import Component from "../classes/Component"
+import { IComponentVars } from "./iComponentVars"
+import { IEventRegister } from "./iEventRegister"
+import { Component } from "../classes/Component"
 
-export interface ComponentOptions {
+export interface IComponentOptions {
     name: string,
     template: string,
     components?: Component[],
     props?: string[],
-    vars?: ComponentVars,
-    asyncVars?: ComponentVars,
-    listeners?: Array<EventRegister>
+    vars?(self:Component): IComponentVars,
+    listeners?: IEventRegister[]
 }

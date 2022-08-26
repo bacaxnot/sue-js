@@ -1,20 +1,12 @@
 import template from './circularButton.html?raw'
-import Component from '../../entities/classes/Component'
-import { ComponentOptions } from '../../entities/interfaces/iComponentOptions'
+import { Component } from '../../entities/classes/Component'
+import { IComponentOptions } from '../../entities/interfaces/iComponentOptions'
 
-const options: ComponentOptions = {
+const options: IComponentOptions = {
     name: 'circularButton',
     template: template,
-    vars: {
-        mssg:'Hola',
-        otherMssg: 'Mundo'
-    },
-    listeners: [
-        {
-            targetQuery: '',
-            event: 'click',
-            callback: ()=>{alert('circular')}
-        }
+    props:[
+        'mssg'
     ]
 }
 

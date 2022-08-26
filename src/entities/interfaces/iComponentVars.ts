@@ -1,3 +1,3 @@
-export interface ComponentVars {
+export interface IComponentVars {
     [key:string]:any
 }

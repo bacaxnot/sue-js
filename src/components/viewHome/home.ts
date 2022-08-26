@@ -1,33 +1,33 @@
-import Component from '../../entities/classes/Component'
-import { ComponentOptions } from '../../entities/interfaces/iComponentOptions'
+import { Component } from '../../entities/classes/Component'
+import { IComponentOptions } from '../../entities/interfaces/iComponentOptions'
 import template from './home.html?raw'
 import './home.sass'
 
 import { CircularButton} from '../circularButton/circularButton'
 
-const options: ComponentOptions = {
+const options: IComponentOptions = {
     name: 'HomeView',
     template: template,
-    vars: {
-        mssg:'Hola',
-        otherMssg: 'Mundo'
-    },
     components:[
         CircularButton
     ],
+    props:[
+        'class'
+    ],
+    vars(_){return{
+        mssg: 'Holaaaaa' ,
+        otherMssg: 'Mundosss'
+    }
+    },
     listeners: [
         {
             targetQuery: '.example',
             event: 'click',
-            callback: ()=>{alert('works')}
+            callback(self){
+                self.content.textContent = 'red'
+            }
         }
     ]
 }
 
-export class HomeView extends Component{
-    constructor(){
-        super(options)   
-    }
-}
-
-export default new HomeView()
+export const HomeView = new Component(options)

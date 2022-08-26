@@ -1,4 +1,4 @@
 <main class="home">
     {this.mssg} {this.otherMssg}
-    <circularButton j-for="mssg in mssgs" class="example">{mssg}</circularButton>
+    <circularButton e-for="mssg in mssgs" class="example" mssg="{this.mssg}" />
 </main>

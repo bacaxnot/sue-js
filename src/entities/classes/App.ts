@@ -1,5 +1,5 @@
 import { IApp } from "../interfaces/iApp"
-import Component from "./Component"
+import { Component } from "./Component"
 
 export default class App implements IApp {
     
@@ -11,13 +11,14 @@ export default class App implements IApp {
      * Executes all the logic the app needs to work properly before rendering
      */
     public start():void {
-        console.log(this.container)
+        // console.log(this.container)
     }
     /**
      * append
      * Appends child elements to container
      */
     public append(component: Component):void {
+        component.load()
         this.container.append(component.content)
     }
     /**
@@ -25,6 +26,7 @@ export default class App implements IApp {
      * Changes the DOM tree inside the app container
      */
     public render(component: Component):void {
+        component.load()
         this.container.replaceChildren(component.content)
     }
 }
