@@ -12,10 +12,10 @@ const options: IComponentOptions = {
         CircularButton
     ],
     props:[
-        'class'
+        'class',
     ],
-    vars(_){return{
-        mssg: 'Holaaaaa' ,
+    vars(self){return{
+        mssg: self.props.class ,
         otherMssg: 'Mundosss'
     }
     },

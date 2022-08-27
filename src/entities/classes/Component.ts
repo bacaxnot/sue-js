@@ -2,7 +2,7 @@ import { IComponent } from "../interfaces/iComponent";
 import { IComponentVars } from "../interfaces/iComponentVars";
 import { IComponentOptions } from "../interfaces/iComponentOptions";
 import { IEventRegister } from "../interfaces/iEventRegister";
-import ComponentElement from "./ComponentElement";
+import { ComponentElement } from "./ComponentElement";
 
 export class Component implements IComponent {
     private element: ComponentElement
@@ -23,16 +23,12 @@ export class Component implements IComponent {
         return this.element.self
     }
     public get props(): IComponentVars{
-        if(!this.options.props){
-            return {}
-        }else{
-            let props: IComponentVars = {}
-            this.options.props.forEach( key => {
-                let value = this.element.getAttribute(key)
-                props = {...props, key:value}
-            })
-            return props
-        }
+        let props: IComponentVars = {}
+        this.options.props?.forEach( key => {
+            let value = this.element.getAttribute(key)
+            props[key] = value
+        })
+        return props
     }
     public get components(): Component[]{
         return this.options.components ?? []
@@ -48,7 +44,7 @@ export class Component implements IComponent {
         return this
     }
     protected replaceVars(): Component {
-        this.element.update(this.vars)
+        this.element.update(this.vars, this.props)
         return this
     }
     protected renderComponents(): Component {
