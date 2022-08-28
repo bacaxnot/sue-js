@@ -49,7 +49,10 @@ export class Component implements IComponent {
     }
     protected renderComponents(): Component {
         this.components.forEach( component => {
-            console.log(component)
+            let componentElements = this.element.querySelector(component.name)
+            componentElements.forEach( componentElement => {
+                this.element.replace(componentElement, component)
+            })
         })
         return this
     }

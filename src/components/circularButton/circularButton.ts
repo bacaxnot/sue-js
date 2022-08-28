@@ -7,6 +7,15 @@ const options: IComponentOptions = {
     template: template,
     props:[
         'mssg'
+    ],
+    listeners:[
+        {
+            targetQuery:'',
+            event:'click',
+            callback(_) {
+                console.log('This component wroks!')
+            },
+        }
     ]
 }
 

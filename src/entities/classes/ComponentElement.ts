@@ -43,11 +43,11 @@ export class ComponentElement implements IComponentElement{
         this.creator.innerHTML = updatedTemplate
         this.updateMemoryReference()
     }
-    public querySelector(query: string): HTMLElement {
+    public querySelector(query: string): HTMLElement[] {
         if(query){
-            return this.self.querySelector(query)!
+            return Array.from(this.self.querySelectorAll(query)!)
         }else{
-            return this.self
+            return [this.self]
         }
     }
     public getAttribute(attr: string): string | null {
@@ -58,8 +58,18 @@ export class ComponentElement implements IComponentElement{
     }
     public addListeners(componentInstance: Component, listeners: IEventRegister[]){
         listeners.forEach( listener => {
-            let target = this.querySelector(listener.targetQuery)
-            target.addEventListener(listener.event, ()=>{listener.callback(componentInstance)}, listener.options)
+            let targets = this.querySelector(listener.targetQuery)
+            targets.forEach( target => {
+                target.addEventListener(listener.event, ()=>{listener.callback(componentInstance)}, listener.options)
+            })
         })
+    }
+    public replace(child: HTMLElement, newComponent: Component): void{
+        let attributes = Array.from(child.attributes)
+        attributes.forEach(attr => {
+          newComponent.content.setAttribute(attr.nodeName, attr.nodeValue!)  
+        })
+        newComponent.load()
+        child.replaceWith(newComponent.content)
     }
 }
