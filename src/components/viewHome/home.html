@@ -1,13 +1,9 @@
 <main class="home">
     {this.mssg} {this.otherMssg}
     <circularButton
-        e-for="mssg in mssgs"
+        e-for="mssg in this.mssgs"
         class="example"
-        mssg="Click me!"
+        mssg="mssg"
     ></circularButton>
-    <circularButton
-        e-for="mssg in mssgs"
-        class="example"
-        mssg="Click me 2!"
-    ></circularButton>
+    <circularButton class="example2" mssg="Click me 2!"></circularButton>
 </main>

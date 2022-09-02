@@ -1,48 +1,47 @@
-import { IComponent } from "../interfaces/iComponent";
-import { IComponentVars } from "../interfaces/iComponentVars";
-import { IComponentOptions } from "../interfaces/iComponentOptions";
-import { IEventRegister } from "../interfaces/iEventRegister";
-import { ComponentElement } from "./ComponentElement";
+import { IComponent } from '../interfaces/iComponent'
+import { IComponentVars } from '../interfaces/iComponentVars'
+import { IComponentOptions } from '../interfaces/iComponentOptions'
+import { IEventRegister } from '../interfaces/iEventRegister'
+import { ComponentElement } from './ComponentElement'
+import { extractIterableInfo } from './Utilities'
 
 export class Component implements IComponent {
     private element: ComponentElement
     private propsState!: IComponentVars
 
-    constructor(private options: IComponentOptions){
+    constructor(private options: IComponentOptions) {
         this.element = new ComponentElement(options.template)
     }
     public load(): Component {
-        this.replaceVars()
-            .renderComponents()
-            .addListeners()
+        this.replaceVars().renderIterables().renderComponents().addListeners()
         return this
     }
-    public get name(): string{
+    public get name(): string {
         return this.options.name
     }
     public get content(): HTMLElement {
         return this.element.self
     }
-    public get props(): IComponentVars{
-        if(!this.propsState){
+    public get props(): IComponentVars {
+        if (!this.propsState) {
             this.propsState = {}
-            this.options.props?.forEach( key => {
+            this.options.props?.forEach(key => {
                 let value = this.element.getAttribute(key)
                 this.propsState[key] = value
             })
         }
         return this.propsState
     }
-    public get components(): Component[]{
+    public get components(): Component[] {
         return this.options.components ?? []
     }
-    public get vars(): IComponentVars{
+    public get vars(): IComponentVars {
         return this.options.vars?.(this) ?? {}
     }
-    public get listeners(): IEventRegister[]{
+    public get listeners(): IEventRegister[] {
         return this.options.listeners ?? []
     }
-    public newCopy(): Component {
+    public fresh(): Component {
         return new Component(this.options)
     }
     protected addListeners(): Component {
@@ -54,12 +53,43 @@ export class Component implements IComponent {
         return this
     }
     protected renderComponents(): Component {
-        this.components.forEach( component => {
+        this.components.forEach(component => {
             let componentElements = this.element.querySelector(component.name)
-            console.log(component, componentElements)
-            componentElements.forEach( componentElement => {
-                this.element.replace(componentElement, component.newCopy())
+            componentElements.forEach(componentElement => {
+                this.element.replace(componentElement, component.fresh())
             })
+        })
+        return this
+    }
+    protected renderIterables(): Component {
+        let children = Array.from(this.content.children)
+        children.forEach(child => {
+            let iterable = child.getAttribute('e-for') ?? ''
+            let iterableInfo = extractIterableInfo(iterable)
+            if (iterableInfo.isValid) {
+                let source = (
+                    iterableInfo.kind == 'vars'
+                        ? this.vars[iterableInfo.source!]
+                        : this.props[iterableInfo.source!]
+                ) as Array<any>
+                let elements: HTMLElement[] = []
+                let targetAttr: string | undefined = undefined
+                let attrs = Array.from(child.attributes)
+                attrs.forEach(attr => {
+                    if (attr.nodeValue == iterableInfo.target) {
+                        targetAttr = attr.nodeName
+                    }
+                })
+                source.forEach(value => {
+                    let newElement = child.cloneNode() as HTMLElement
+                    if (targetAttr) {
+                        newElement.setAttribute(targetAttr, value)
+                    }
+                    elements.push(newElement)
+                })
+                console.log(elements)
+                child.replaceWith(...elements)
+            }
         })
         return this
     }
