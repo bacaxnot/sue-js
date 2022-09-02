@@ -12,8 +12,9 @@ const options: IComponentOptions = {
         {
             targetQuery:'',
             event:'click',
-            callback(_) {
-                console.log('This component wroks!')
+            callback(self) {
+                console.log(self.props)
+                console.log('This component works!')
             },
         }
     ]

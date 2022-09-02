@@ -21,10 +21,10 @@ const options: IComponentOptions = {
     },
     listeners: [
         {
-            targetQuery: '.example',
+            targetQuery: '',
             event: 'click',
             callback(self){
-                self.content.textContent = 'red'
+                console.log(self.vars.mssg)
             }
         }
     ]

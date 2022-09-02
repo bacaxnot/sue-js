@@ -8,5 +8,5 @@ export interface IComponentOptions {
     components?: Component[],
     props?: string[],
     vars?(self:Component): IComponentVars,
-    listeners?: IEventRegister[]
+    listeners?: IEventRegister[],
 }

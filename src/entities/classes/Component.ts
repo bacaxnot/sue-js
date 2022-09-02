@@ -6,6 +6,7 @@ import { ComponentElement } from "./ComponentElement";
 
 export class Component implements IComponent {
     private element: ComponentElement
+    private propsState!: IComponentVars
 
     constructor(private options: IComponentOptions){
         this.element = new ComponentElement(options.template)
@@ -23,12 +24,14 @@ export class Component implements IComponent {
         return this.element.self
     }
     public get props(): IComponentVars{
-        let props: IComponentVars = {}
-        this.options.props?.forEach( key => {
-            let value = this.element.getAttribute(key)
-            props[key] = value
-        })
-        return props
+        if(!this.propsState){
+            this.propsState = {}
+            this.options.props?.forEach( key => {
+                let value = this.element.getAttribute(key)
+                this.propsState[key] = value
+            })
+        }
+        return this.propsState
     }
     public get components(): Component[]{
         return this.options.components ?? []
@@ -38,6 +41,9 @@ export class Component implements IComponent {
     }
     public get listeners(): IEventRegister[]{
         return this.options.listeners ?? []
+    }
+    public newCopy(): Component {
+        return new Component(this.options)
     }
     protected addListeners(): Component {
         this.element.addListeners(this, this.listeners)
@@ -50,8 +56,9 @@ export class Component implements IComponent {
     protected renderComponents(): Component {
         this.components.forEach( component => {
             let componentElements = this.element.querySelector(component.name)
+            console.log(component, componentElements)
             componentElements.forEach( componentElement => {
-                this.element.replace(componentElement, component)
+                this.element.replace(componentElement, component.newCopy())
             })
         })
         return this

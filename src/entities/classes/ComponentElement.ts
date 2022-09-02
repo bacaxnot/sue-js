@@ -6,12 +6,12 @@ import { Component } from "./Component";
 
 export class ComponentElement implements IComponentElement{
     private creator: HTMLTemplateElement
-    private instance: HTMLElement
+    private instance!: HTMLElement
 
     constructor(private template: string){
         this.creator = document.createElement('template')
         this.setCreator(this.template)
-        this.instance = this.creator.content.firstElementChild as HTMLElement
+        this.updateMemoryReference()
     }
     private setCreator(stringHTML: string): void {
         this.creator.innerHTML = stringHTML.trim()
@@ -67,9 +67,10 @@ export class ComponentElement implements IComponentElement{
     public replace(child: HTMLElement, newComponent: Component): void{
         let attributes = Array.from(child.attributes)
         attributes.forEach(attr => {
-          newComponent.content.setAttribute(attr.nodeName, attr.nodeValue!)  
+          newComponent.content.setAttribute(attr.nodeName, attr.nodeValue!)
         })
         newComponent.load()
+        child.classList.forEach(iClass => newComponent.content.classList.add(iClass))
         child.replaceWith(newComponent.content)
     }
 }
