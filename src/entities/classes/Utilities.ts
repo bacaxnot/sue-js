@@ -34,3 +34,12 @@ export const extractIterableInfo = (iterableString: string): IIterableInfo => {
     iterableInfo.isValid = true
     return iterableInfo
 }
+
+export const replaceInString = (
+    template: string,
+    target: string,
+    value: string
+): string => {
+    let variable = new RegExp(target, 'g')
+    return template.replace(variable, value)
+}

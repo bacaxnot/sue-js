@@ -19,10 +19,10 @@ const options: IComponentOptions = {
     },
     listeners: [
         {
-            targetQuery: '',
+            targetQuery: '.example2',
             event: 'click',
             callback(self) {
-                console.log(self.vars.mssg)
+                console.log('the other eventhandler')
             },
         },
     ],

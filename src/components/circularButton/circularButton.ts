@@ -5,19 +5,17 @@ import { IComponentOptions } from '../../entities/interfaces/iComponentOptions'
 const options: IComponentOptions = {
     name: 'circularButton',
     template: template,
-    props:[
-        'mssg'
-    ],
-    listeners:[
+    props: ['mssg'],
+    listeners: [
         {
-            targetQuery:'',
-            event:'click',
+            targetQuery: '',
+            event: 'click',
             callback(self) {
-                console.log(self.props)
+                console.log(self.content)
                 console.log('This component works!')
             },
-        }
-    ]
+        },
+    ],
 }
 
 export const CircularButton = new Component(options)

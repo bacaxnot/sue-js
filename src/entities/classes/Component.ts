@@ -3,7 +3,7 @@ import { IComponentVars } from '../interfaces/iComponentVars'
 import { IComponentOptions } from '../interfaces/iComponentOptions'
 import { IEventRegister } from '../interfaces/iEventRegister'
 import { ComponentElement } from './ComponentElement'
-import { extractIterableInfo } from './Utilities'
+import { extractIterableInfo, replaceInString } from './Utilities'
 
 export class Component implements IComponent {
     private element: ComponentElement
@@ -81,13 +81,19 @@ export class Component implements IComponent {
                     }
                 })
                 source.forEach(value => {
-                    let newElement = child.cloneNode() as HTMLElement
+                    let newElement = child.cloneNode(true) as HTMLElement
+                    let text = newElement.innerHTML
                     if (targetAttr) {
                         newElement.setAttribute(targetAttr, value)
                     }
+                    text = replaceInString(
+                        text,
+                        `{${iterableInfo.target}}`,
+                        value
+                    )
+                    newElement.innerHTML = text
                     elements.push(newElement)
                 })
-                console.log(elements)
                 child.replaceWith(...elements)
             }
         })

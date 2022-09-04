@@ -1,14 +1,14 @@
-import { IComponentVars } from "../interfaces/iComponentVars";
-import { IComponentElement } from "../interfaces/iComponentElement";
-import { IEventRegister } from "../interfaces/iEventRegister";
-import { Component } from "./Component";
+import { IComponentVars } from '../interfaces/iComponentVars'
+import { IComponentElement } from '../interfaces/iComponentElement'
+import { IEventRegister } from '../interfaces/iEventRegister'
+import { Component } from './Component'
+import { replaceInString } from './Utilities'
 
-
-export class ComponentElement implements IComponentElement{
+export class ComponentElement implements IComponentElement {
     private creator: HTMLTemplateElement
     private instance!: HTMLElement
 
-    constructor(private template: string){
+    constructor(private template: string) {
         this.creator = document.createElement('template')
         this.setCreator(this.template)
         this.updateMemoryReference()
@@ -16,37 +16,37 @@ export class ComponentElement implements IComponentElement{
     private setCreator(stringHTML: string): void {
         this.creator.innerHTML = stringHTML.trim()
     }
-    public get self(): HTMLElement{
+    public get self(): HTMLElement {
         return this.instance
     }
     private updateMemoryReference(): void {
         this.instance = this.creator.content.firstElementChild as HTMLElement
     }
     public update(vars: IComponentVars, props: IComponentVars): void {
-        let updatedTemplate = this.template
+        let updatedTemplate: string = this.template
         let keys: string[]
         // iterating vars
         keys = Object.keys(vars)
-        keys.forEach( key => {
-            let variable = new RegExp(`{this.${key}}`, "g")
+        keys.forEach(key => {
+            let variable = `{{this.${key}}}`
             let value = vars[key]
-            updatedTemplate = updatedTemplate.replace(variable, value)
+            updatedTemplate = replaceInString(updatedTemplate, variable, value)
         })
         // iterating props
         keys = Object.keys(props)
-        keys.forEach( key => {
-            let variable = new RegExp(`{${key}}`, "g")
+        keys.forEach(key => {
+            let prop = `{{${key}}}`
             let value = props[key]
-            updatedTemplate = updatedTemplate.replace(variable, value)
+            updatedTemplate = replaceInString(updatedTemplate, prop, value)
         })
         // updating values
         this.creator.innerHTML = updatedTemplate
         this.updateMemoryReference()
     }
     public querySelector(query: string): HTMLElement[] {
-        if(query){
+        if (query) {
             return Array.from(this.self.querySelectorAll(query)!)
-        }else{
+        } else {
             return [this.self]
         }
     }
@@ -56,21 +56,32 @@ export class ComponentElement implements IComponentElement{
     public setAttribute(attr: string, value: string): void {
         this.self.setAttribute(attr, value)
     }
-    public addListeners(componentInstance: Component, listeners: IEventRegister[]){
-        listeners.forEach( listener => {
+    public addListeners(
+        componentInstance: Component,
+        listeners: IEventRegister[]
+    ) {
+        listeners.forEach(listener => {
             let targets = this.querySelector(listener.targetQuery)
-            targets.forEach( target => {
-                target.addEventListener(listener.event, ()=>{listener.callback(componentInstance)}, listener.options)
+            targets.forEach(target => {
+                target.addEventListener(
+                    listener.event,
+                    () => {
+                        listener.callback(componentInstance)
+                    },
+                    listener.options
+                )
             })
         })
     }
-    public replace(child: HTMLElement, newComponent: Component): void{
+    public replace(child: HTMLElement, newComponent: Component): void {
         let attributes = Array.from(child.attributes)
         attributes.forEach(attr => {
-          newComponent.content.setAttribute(attr.nodeName, attr.nodeValue!)
+            newComponent.content.setAttribute(attr.nodeName, attr.nodeValue!)
         })
         newComponent.load()
-        child.classList.forEach(iClass => newComponent.content.classList.add(iClass))
+        child.classList.forEach(iClass =>
+            newComponent.content.classList.add(iClass)
+        )
         child.replaceWith(newComponent.content)
     }
 }
