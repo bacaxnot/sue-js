@@ -14,7 +14,7 @@ const options: IComponentOptions = {
         return {
             mssg: self.props.class,
             otherMssg: 'Mundosss',
-            mssgs: ['ms1', 'ms2'],
+            mssgs: ['ms1', 'ms2', 'otro', 'otro2'],
         }
     },
     listeners: [
