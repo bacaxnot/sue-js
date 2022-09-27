@@ -12,9 +12,9 @@ const options: IComponentOptions = {
     props: ['class'],
     vars(self) {
         return {
-            mssg: self.props.class,
-            otherMssg: 'Mundosss',
-            mssgs: ['ms1', 'ms2', 'otro', 'otro2'],
+            mssg: 'Hello',
+            otherMssg: 'World',
+            mssgs: ['ms1', 'ms2', 'ms3', 'ms4'],
         }
     },
     listeners: [
@@ -22,7 +22,8 @@ const options: IComponentOptions = {
             targetQuery: '.example2',
             event: 'click',
             callback(self) {
-                console.log('the other eventhandler')
+                console.log('Another eventhandler')
+                console.log(self)
             },
         },
     ],
