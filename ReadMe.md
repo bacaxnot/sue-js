@@ -67,7 +67,7 @@ export const CircularButton = new Component(options)
 ```
 
 <!-- Example - Listeners API explanation -->
-As you can see, the **options** object has a `mssg` **prop** which is being used inside the HTML template file. It has also an EventListener declared inside the **listeners** array. As you can see, the `IEventRegister` interface receives a `targetQuery`, which is an empty string in this case. When `targetQuery` is empty, it references the whole component. You can also attach EventListeners to children elements of the **Component** using `Element.querySelector()` syntax inside `targetQuery` (we'll see later).
+As you can see, the **options** object has a `mssg` **prop** which is being used inside the HTML template file. It has also an EventListener declared inside the **listeners** array. The `IEventRegister` interface receives a `targetQuery`, which is an empty string in this case. When `targetQuery` is empty, it references the whole component. You can also attach EventListeners to children elements of the **Component** using `Element.querySelector()` syntax inside `targetQuery` (we'll see later).
 \
 \
 There's also a `callback()` attribute that uses `self` as parameter, which, as previously mentioned, references the component instance. The `callback()` will be executed whenever the declared `event` is detected. In this case, when you click the component, the console will throw:
