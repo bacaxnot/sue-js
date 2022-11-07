@@ -22,7 +22,7 @@ export default defineConfig({
             },
             {
                 find: '@utils',
-                replacement: path.resolve(__dirname, 'src/utils'),
+                replacement: path.resolve(__dirname, 'src/entities/utils'),
             },
             {
                 find: '@config',
