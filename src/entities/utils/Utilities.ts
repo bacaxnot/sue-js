@@ -1,4 +1,4 @@
-import { IIterableInfo } from '../interfaces/iIterableInfo'
+import { IIterableInfo } from '@interfaces'
 
 export const extractIterableInfo = (iterableString: string): IIterableInfo => {
     /**

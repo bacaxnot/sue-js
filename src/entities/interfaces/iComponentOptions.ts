@@ -1,12 +1,10 @@
-import { IComponentVars } from "./iComponentVars"
-import { IEventRegister } from "./iEventRegister"
-import { Component } from "../classes/Component"
+import { IComponent, IComponentVars, IEventRegister } from '@interfaces'
 
 export interface IComponentOptions {
-    name: string,
-    template: string,
-    components?: Component[],
-    props?: string[],
-    vars?(self:Component): IComponentVars,
-    listeners?: IEventRegister[],
+    name: string
+    template: string
+    components?: IComponent[]
+    props?: string[]
+    vars?(self: IComponent): IComponentVars
+    listeners?: IEventRegister[]
 }

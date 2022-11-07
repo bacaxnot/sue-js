@@ -1,5 +1,5 @@
-import { Component } from '../../entities/classes/Component'
-import { IComponentOptions } from '../../entities/interfaces/iComponentOptions'
+import { Component } from '@classes'
+import { IComponentOptions } from '@interfaces'
 import template from './navbar.html?raw'
 
 const options: IComponentOptions = {

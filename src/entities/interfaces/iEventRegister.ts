@@ -1,8 +1,8 @@
-import { Component } from "../classes/Component";
+import { IComponent } from '@interfaces'
 
 export interface IEventRegister {
-    targetQuery: string,
-    event: string,
-    callback: (self: Component) => any,
+    targetQuery: string
+    event: string
+    callback: (self: IComponent) => any
     options?: boolean | AddEventListenerOptions | undefined
 }

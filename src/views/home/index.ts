@@ -1,8 +1,7 @@
-import { Component } from '../../entities/classes/Component'
-import { IComponentOptions } from '../../entities/interfaces/iComponentOptions'
-import template from './home.html?raw'
-
-import { NavBar } from '../../components/navbar/navbar'
+import template from './index.html?raw'
+import { Component } from '@classes'
+import { IComponentOptions } from '@interfaces'
+import { NavBar } from '@components'
 
 const options: IComponentOptions = {
     name: 'HomeView',
@@ -22,7 +21,7 @@ const options: IComponentOptions = {
             event: 'click',
             callback(self) {
                 console.log('Another eventhandler')
-                console.log(self)
+                console.log(self.vars.mssg)
             },
         },
     ],

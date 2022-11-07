@@ -1,18 +1,21 @@
-import { IComponent } from '../interfaces/iComponent'
-import { IComponentVars } from '../interfaces/iComponentVars'
-import { IComponentOptions } from '../interfaces/iComponentOptions'
-import { IEventRegister } from '../interfaces/iEventRegister'
-import { ComponentElement } from './ComponentElement'
-import { extractIterableInfo, replaceInString } from './Utilities'
+import {
+    IComponent,
+    IComponentOptions,
+    IComponentVars,
+    IEventRegister,
+    IComponentElement,
+} from '@interfaces'
+import { extractIterableInfo, replaceInString } from '@utils'
+import { ComponentElement } from '@classes'
 
 export class Component implements IComponent {
-    private element: ComponentElement
+    private element: IComponentElement
     private propsState!: IComponentVars
 
     constructor(private options: IComponentOptions) {
         this.element = new ComponentElement(options.template)
     }
-    public load(): Component {
+    public load(): IComponent {
         this.replaceVars().renderIterables().renderComponents().addListeners()
         return this
     }
@@ -32,7 +35,7 @@ export class Component implements IComponent {
         }
         return this.propsState
     }
-    public get components(): Component[] {
+    public get components(): IComponent[] {
         return this.options.components ?? []
     }
     public get vars(): IComponentVars {
@@ -41,7 +44,7 @@ export class Component implements IComponent {
     public get listeners(): IEventRegister[] {
         return this.options.listeners ?? []
     }
-    public fresh(): Component {
+    public fresh(): IComponent {
         return new Component(this.options)
     }
     protected addListeners(): Component {

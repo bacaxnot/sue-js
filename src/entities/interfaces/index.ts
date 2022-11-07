@@ -1,0 +1,8 @@
+export type { IApp } from '@interfaces/iApp'
+export type { IComponent } from '@interfaces/iComponent'
+export type { IComponentElement } from '@interfaces/iComponentElement'
+export type { IComponentOptions } from '@interfaces/iComponentOptions'
+export type { IComponentVars } from '@interfaces/iComponentVars'
+export type { IEventRegister } from '@interfaces/iEventRegister'
+export type { IIterableInfo } from '@interfaces/iIterableInfo'
+export type { IRouteObject } from '@interfaces/iRouteObject'

@@ -1,6 +1,6 @@
 import './styles/style.sass'
-import App from './entities/classes/App'
-import { HomeView } from './views/home/home'
+import { App } from '@classes'
+import { HomeView } from '@views'
 
 const appContainer = document.querySelector<HTMLDivElement>('#app')!
 const app = new App(appContainer)

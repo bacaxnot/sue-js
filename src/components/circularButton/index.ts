@@ -1,6 +1,6 @@
 import template from './circularButton.html?raw'
-import { Component } from '../../entities/classes/Component'
-import { IComponentOptions } from '../../entities/interfaces/iComponentOptions'
+import { Component } from '@classes'
+import { IComponentOptions } from '@interfaces'
 
 const options: IComponentOptions = {
     name: 'circularButton',

@@ -1,9 +1,10 @@
-import { Component } from "../classes/Component"
-import { IComponentVars } from "./iComponentVars"
+import { IComponentVars } from '@interfaces'
 
 export interface IComponent {
-    readonly name:string,
-    readonly content:Element,
-    readonly components:Array<Component>,
-    readonly vars:IComponentVars
-} 
+    readonly name: string
+    readonly content: Element
+    readonly components: Array<IComponent>
+    readonly vars: IComponentVars
+    load(): IComponent
+    fresh(): IComponent
+}

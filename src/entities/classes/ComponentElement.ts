@@ -1,8 +1,10 @@
-import { IComponentVars } from '../interfaces/iComponentVars'
-import { IComponentElement } from '../interfaces/iComponentElement'
-import { IEventRegister } from '../interfaces/iEventRegister'
-import { Component } from './Component'
-import { replaceInString } from './Utilities'
+import {
+    IComponent,
+    IComponentElement,
+    IComponentVars,
+    IEventRegister,
+} from '@interfaces'
+import { replaceInString } from '@utils'
 
 export class ComponentElement implements IComponentElement {
     private creator: HTMLTemplateElement
@@ -57,9 +59,9 @@ export class ComponentElement implements IComponentElement {
         this.self.setAttribute(attr, value)
     }
     public addListeners(
-        componentInstance: Component,
+        componentInstance: IComponent,
         listeners: IEventRegister[]
-    ) {
+    ): void {
         listeners.forEach(listener => {
             let targets = this.querySelector(listener.targetQuery)
             targets.forEach(target => {
@@ -73,7 +75,7 @@ export class ComponentElement implements IComponentElement {
             })
         })
     }
-    public replace(child: HTMLElement, newComponent: Component): void {
+    public replace(child: HTMLElement, newComponent: IComponent): void {
         let attributes = Array.from(child.attributes)
         attributes.forEach(attr => {
             newComponent.content.setAttribute(attr.nodeName, attr.nodeValue!)
