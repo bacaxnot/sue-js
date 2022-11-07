@@ -28,7 +28,9 @@
             "@config": ["src/config/index"],
             "@config/*": ["src/config/*"],
             "@views": ["src/views/index"],
-            "@views/*": ["src/views/*"]
+            "@views/*": ["src/views/*"],
+            "@components": ["src/components/index"],
+            "@components/*": ["src/components/*"]
         }
     },
     "include": ["src"]

@@ -32,6 +32,10 @@ export default defineConfig({
                 find: '@views',
                 replacement: path.resolve(__dirname, 'src/views'),
             },
+            {
+                find: '@components',
+                replacement: path.resolve(__dirname, 'src/components'),
+            },
         ],
     },
 })
