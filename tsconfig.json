@@ -14,7 +14,22 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noImplicitReturns": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"],
+            "@classes": ["src/entities/classes/index"],
+            "@classes/*": ["src/entities/classes/*"],
+            "@interfaces": ["src/entities/interfaces/index"],
+            "@interfaces/*": ["src/entities/interfaces/*"],
+            "@types": ["src/entities/types"],
+            "@utils": ["src/utils/index"],
+            "@utils/*": ["src/utils/*"],
+            "@config": ["src/config/index"],
+            "@config/*": ["src/config/*"],
+            "@views": ["src/views/index"],
+            "@views/*": ["src/views/*"]
+        }
     },
     "include": ["src"]
 }
