@@ -5,7 +5,7 @@ This is the client side of a basic web API made for testing new technologies. Th
 <!-- Component API introduction -->
 ## Components API
 ---
-Instead of using an existing Front-end Framework or Library, I tried to create a basic API for parsing dynamic HTML templates. It works through **Component** objects instantiation. To create a new instance of a **Component** you must define an object literal using the `IComponentOptions` interface, and pass it to the **Component** constructor.
+Instead of using an existing Front-end Framework or Library, I tried to create a basic API for parsing dynamic HTML templates. It works through **Component** objects instantiation. To create a new instance of a **Component** you must define an object literal using the [`IComponentOptions`](#ComponentOptions) interface, and pass it to the **Component** constructor. There's an [example implementation](#example-implementation) as a reference a few lines down.
 
 <!-- Options Interface explanation -->
 ## ComponentOptions
