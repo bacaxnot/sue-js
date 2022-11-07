@@ -1,9 +1,9 @@
-import './styles/global.sass'
+import './styles/style.sass'
 import App from './entities/classes/App'
-import { HomeView } from './components/viewHome/home';
+import { HomeView } from './views/home/home'
 
 const appContainer = document.querySelector<HTMLDivElement>('#app')!
-const app = new App(appContainer);
+const app = new App(appContainer)
 
 app.start()
 app.render(HomeView)

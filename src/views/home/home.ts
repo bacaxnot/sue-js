@@ -1,14 +1,13 @@
 import { Component } from '../../entities/classes/Component'
 import { IComponentOptions } from '../../entities/interfaces/iComponentOptions'
 import template from './home.html?raw'
-import './home.sass'
 
-import { CircularButton } from '../circularButton/circularButton'
+import { NavBar } from '../../components/navbar/navbar'
 
 const options: IComponentOptions = {
     name: 'HomeView',
     template: template,
-    components: [CircularButton],
+    components: [NavBar],
     props: ['class'],
     vars(self) {
         return {
