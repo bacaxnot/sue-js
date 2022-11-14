@@ -1,11 +1,10 @@
 import './styles/style.sass'
 import { App } from '@classes'
-import { HomeView } from '@views'
+import { routes } from '@/routes'
 
-const appContainer = document.querySelector<HTMLDivElement>('#app')!
-const app = new App(appContainer)
+const container = document.querySelector<HTMLDivElement>('#app')!
+const app = new App(container, routes)
 
 app.start()
-app.render(HomeView)
 
 export default app
