@@ -1,9 +1,17 @@
 import { IRouteObject } from '@interfaces'
-import { HomeView } from '@views'
+import { HomeView, NotFound } from '@views'
 
 export const routes: IRouteObject[] = [
     {
         path: '/',
-        component: HomeView,
+        view: HomeView,
+    },
+    {
+        path: '/detail',
+        view: HomeView,
+    },
+    {
+        path: '*',
+        view: NotFound,
     },
 ]
