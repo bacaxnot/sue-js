@@ -9,7 +9,8 @@ const options: IComponentOptions = {
     components: [NavBar],
     vars(self) {
         return {
-            mssg: '404 - NotFound',
+            title: 'Whoops!',
+            mssg: `Check for the URL, this link doesn't exist`,
         }
     },
 }
