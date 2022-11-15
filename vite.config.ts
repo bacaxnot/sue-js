@@ -36,6 +36,14 @@ export default defineConfig({
                 find: '@components',
                 replacement: path.resolve(__dirname, 'src/components'),
             },
+            {
+                find: '@icons',
+                replacement: path.resolve(__dirname, 'public/assets/icons'),
+            },
+            {
+                find: '@logos',
+                replacement: path.resolve(__dirname, 'public/assets/logos'),
+            },
         ],
     },
 })

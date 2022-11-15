@@ -30,7 +30,8 @@
             "@views": ["src/views/index"],
             "@views/*": ["src/views/*"],
             "@components": ["src/components/index"],
-            "@components/*": ["src/components/*"]
+            "@icons/*": ["public/assets/icons/*"],
+            "@logos/*": ["public/assets/logos/*"]
         }
     },
     "include": ["src"]
