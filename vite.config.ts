@@ -38,11 +38,11 @@ export default defineConfig({
             },
             {
                 find: '@icons',
-                replacement: path.resolve(__dirname, 'public/assets/icons'),
+                replacement: path.resolve(__dirname, 'src/assets/icons'),
             },
             {
                 find: '@logos',
-                replacement: path.resolve(__dirname, 'public/assets/logos'),
+                replacement: path.resolve(__dirname, 'src/assets/logos'),
             },
         ],
     },
