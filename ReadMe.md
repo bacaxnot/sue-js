@@ -1,5 +1,5 @@
 <!-- Project introduction -->
-# **Dro-ex**
+# **Implementation**
 This is the client side of a basic web API made for testing new technologies. The web app consumes a [REST API](https://github.com/cala-js/coex-test-api) to get the necessary data to render content.
 
 <!-- Component API introduction -->
